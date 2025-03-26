@@ -1643,13 +1643,11 @@ class _Aster_Transaction extends State<Aster_Transaction> {
                                                     alignLabelWithHint: true,
                                                   ),
                                                   textAlign: TextAlign.center,
-                                                  inputFormatters: [
-                                                    FilteringTextInputFormatter.allow(
-                                                      RegExp(r'^[PpHh]?\d{0,7}$'),
-                                                    )
-
-                                                    // Allow any character at the beginning, followed by 0 to 8 digits
+                                                  inputFormatters: [FilteringTextInputFormatter.allow(
+                                                      RegExp(r'^[PpHh]{1}\d{0,7}$'),
+                                                    ),
                                                   ],
+
                                                   onChanged: (content) {
                                                     globals.Glb_Bill_Validation_Controller =
                                                         Bill_Validation_Controller
