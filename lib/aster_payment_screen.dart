@@ -1644,9 +1644,9 @@ class _Aster_Transaction extends State<Aster_Transaction> {
                                                   ),
                                                   textAlign: TextAlign.center,
                                                   inputFormatters: [
-                                                    FilteringTextInputFormatter
-                                                        .allow(RegExp(
-                                                            r'^[Pp]?\d{0,7}'))
+                                                    FilteringTextInputFormatter.allow(
+                                                      RegExp(r'^[PpHh]?\d{0,7}$'),
+                                                    )
 
                                                     // Allow any character at the beginning, followed by 0 to 8 digits
                                                   ],
