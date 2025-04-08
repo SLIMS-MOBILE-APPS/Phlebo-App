@@ -266,7 +266,7 @@ class _DrawerForAllState extends State<DrawerForAll> {
           SizedBox(
             height: 280,
           ),
-          Center(child: Text("version: 1.7.7+68")),
+          Center(child: Text("version: 1.7.8+72")),
           ListView.builder(
             itemCount: files.length,
             shrinkWrap: true,
