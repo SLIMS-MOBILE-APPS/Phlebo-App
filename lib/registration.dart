@@ -245,7 +245,7 @@ class _RegistrationState extends State<Registration> {
       "user_Title": globals.Selected_Title,
       "area_id": globals.Selected_Pincode,
       "city_id": globals.Selected_Pincode,
-      "age": age,
+      "age": globals.age,//age,
       "sessionID": globals.SESSION_ID,
       "connection": globals.Connection_Flag
     };
@@ -1034,6 +1034,7 @@ class _RegistrationState extends State<Registration> {
                                   if (picked != null) {
                                     setState(() {
                                       _selectedDate = picked;
+                                      globals.age="${DateTime.now().year - picked.year}";
                                       _ageController.text =
                                           "${DateTime.now().year - picked.year}";
                                       globals.selected_date =
