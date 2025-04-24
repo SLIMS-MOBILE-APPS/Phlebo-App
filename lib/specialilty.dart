@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dashboard.dart';
+import 'function.dart';
 import 'select_services.dart';
 
 import 'family_members.dart';
@@ -834,6 +836,23 @@ class _SpacialityState extends State<Spaciality> {
                 ),
               ),
               Spacer(),
+              IconButton(
+                icon: Icon(
+                  Icons.dashboard,
+                  color: Color.fromARGB(255, 170, 19, 84),
+                ),
+                onPressed: () {
+                  globals_clear_Function();
+                  globals.flag_check = "";
+                  globals.REFRL_ID = "";
+                  globals.Selected_Title = "";
+                  globals.LOCATION_ID_new_order = "";
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Phlebo_Dashboard()),
+                  );
+                },
+              ),
             ],
           ),
         ),

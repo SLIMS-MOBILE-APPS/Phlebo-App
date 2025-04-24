@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:phleboapp/patient_details..dart';
 import 'aster_payment_screen.dart';
+import 'dashboard.dart';
+import 'function.dart';
 import 'healmax_payment_screen.dart';
 import 'lucid_payment_screen.dart';
+// import 'new_tenet_transaction_screen.dart';
 import 'nm_payment_screen.dart';
+
 import 'tenet_transaction_screen.dart';
 import 'transaction_existing.dart';
 import 'drawer.dart';
@@ -132,30 +137,40 @@ class _Phlebo_Bill_Details extends State<Phlebo_Bill_Details> {
   @override
   Widget build(BuildContext context) {
     Future<bool> _showExitDialog(BuildContext context) async {
-      final result = await showDialog<bool>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              'Alert',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            ),
-            content: Text(
-                "While using the phlebo app, please only use the app\'s back button."),
-            // actions: <Widget>[
-            //   TextButton(
-            //     onPressed: () {
-            //      await Navigator.of(context).pop(false);
-            //     },
-            //     child: Text('OK'),
-            //   ),
-            // ],
-          );
-        },
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(
+          'Are you sure?',
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        ),
+        content: Text("Do you want to exit the App?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false); // Stay in app
+            },
+            child: Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true); // Trigger exit
+            },
+            child: Text('Yes'),
+          ),
+        ],
       );
+    },
+  );
 
-      return result ?? false;
-    }
+  if (result == true) {
+    SystemNavigator.pop(); // ✅ Exit the app
+  }
+
+  return Future.value(false); // Prevent default back behavior
+}
+
 
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
@@ -208,7 +223,27 @@ class _Phlebo_Bill_Details extends State<Phlebo_Bill_Details> {
           actions: <Widget>[Container()],
           title: MediaQuery(
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: Text('Bill Details')),
+              child: Row(
+                children: [
+                  Text('Bill Details'),  Spacer(),    IconButton(
+                    icon: Icon(
+                      Icons.dashboard,
+                      color: Color.fromARGB(255, 170, 19, 84),
+                    ),
+                    onPressed: () {
+                      globals_clear_Function();
+                      globals.flag_check = "";
+                      globals.REFRL_ID = "";
+                      globals.Selected_Title = "";
+                      globals.LOCATION_ID_new_order = "";
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Phlebo_Dashboard()),
+                      );
+                    },
+                  ),
+                ],
+              )),
         ),
         drawer: DrawerForAll(),
         body: Container(

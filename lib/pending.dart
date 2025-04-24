@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'patient_details..dart';
 import 'reason_reject.dart';
@@ -700,30 +701,40 @@ class _Phleb_Pending extends State<Phleb_Pending> {
       }).toList(),
     );
     Future<bool> _showExitDialog(BuildContext context) async {
-      final result = await showDialog<bool>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              'Alert',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            ),
-            content: Text(
-                "While using the phlebo app, please only use the app\'s back button."),
-            // actions: <Widget>[
-            //   TextButton(
-            //     onPressed: () {
-            //      await Navigator.of(context).pop(false);
-            //     },
-            //     child: Text('OK'),
-            //   ),
-            // ],
-          );
-        },
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(
+          'Are you sure?',
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        ),
+        content: Text("Do you want to exit the App?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false); // Stay in app
+            },
+            child: Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true); // Trigger exit
+            },
+            child: Text('Yes'),
+          ),
+        ],
       );
+    },
+  );
 
-      return result ?? false;
-    }
+  if (result == true) {
+    SystemNavigator.pop(); // ✅ Exit the app
+  }
+
+  return Future.value(false); // Prevent default back behavior
+}
+
 
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;

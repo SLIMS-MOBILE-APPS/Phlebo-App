@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'models.dart';
@@ -644,30 +645,40 @@ class _Phlebo_DashboardState extends State<Phlebo_Dashboard> {
           }),
     );
     Future<bool> _showExitDialog(BuildContext context) async {
-      final result = await showDialog<bool>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              'Alert',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            ),
-            content: Text(
-                "While using the phlebo app, please only use the app\'s back button."),
-            // actions: <Widget>[
-            //   TextButton(
-            //     onPressed: () {
-            //      await Navigator.of(context).pop(false);
-            //     },
-            //     child: Text('OK'),
-            //   ),
-            // ],
-          );
-        },
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(
+          'Are you sure?',
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        ),
+        content: Text("Do you want to exit the App?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false); // Stay in app
+            },
+            child: Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true); // Trigger exit
+            },
+            child: Text('Yes'),
+          ),
+        ],
       );
+    },
+  );
 
-      return result ?? false;
-    }
+  if (result == true) {
+    SystemNavigator.pop(); // ✅ Exit the app
+  }
+
+  return Future.value(false); // Prevent default back behavior
+}
+
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

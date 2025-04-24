@@ -1437,165 +1437,261 @@ class _Tenet_Transaction extends State<Tenet_Transaction> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+
+                                  // globals.Glb_Is_Req_Wallet == "Y"
+                                  //     ?
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.only(
+                                      top: 20.0,
+                                      left: 8.0,
+                                      bottom: 8.0,
+                                      right: 8.0,
+                                    ),
                                     child: Row(
                                       children: [
                                         Container(
-                                          width: 100,
+                                          width: 150,
                                           child: MediaQuery(
-                                            data: MediaQuery.of(context)
-                                                .copyWith(textScaleFactor: 1.0),
+                                            data: MediaQuery.of(
+                                                context)
+                                                .copyWith(
+                                                textScaleFactor:
+                                                1.0),
                                             child: const Text(
-                                              "Cash Payment",
+                                              "Wallet",
                                               style: TextStyle(
                                                 fontSize: 15,
                                               ),
                                             ),
                                           ),
                                         ),
-                                        Spacer(),
-                                        globals.glb_IS_DISCOUNT_NEED == "Y"
-                                            ? Container(
-                                                decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.all(
-                                                        Radius.circular(5)),
-                                                    border: Border.all(
-                                                        color:
-                                                            Colors.blueAccent)),
-                                                width: 120,
-                                                height: 30,
-                                                child: Center(
-                                                  child: MediaQuery(
-                                                      data: MediaQuery.of(
-                                                              context)
-                                                          .copyWith(
-                                                              textScaleFactor:
-                                                                  1.0),
-                                                      child: globals.glb_ConcessionPlusCash ==
-                                                                  0 ||
-                                                              globals.glb_ConcessionPlusCash ==
-                                                                  ""
-                                                          ? Text(
-                                                              globals
-                                                                  .total_price,
-                                                              style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          78,
-                                                                          75,
-                                                                          75),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )
-                                                          : Text(
-                                                              globals
-                                                                  .glb_ConcessionPlusCash
-                                                                  .toString(),
-                                                              style: TextStyle(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          78,
-                                                                          75,
-                                                                          75),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            )),
-                                                ))
-                                            : globals.glb_IS_DISCOUNT_NEED ==
-                                                    "Y"
-                                                ? Container(
-                                                    decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.all(
-                                                            Radius.circular(5)),
-                                                        border: Border.all(
-                                                            color: Colors
-                                                                .blueAccent)),
-                                                    width: 120,
-                                                    height: 30,
-                                                    child: Center(
-                                                        child: MediaQuery(
-                                                            data: MediaQuery.of(context)
-                                                                .copyWith(
-                                                                    textScaleFactor: 1.0),
-                                                            child: globals.glb_Due_Amount == 0 || globals.glb_Due_Amount == ""
-                                                                ? Text(
-                                                                    globals
-                                                                        .total_price,
-                                                                    style: TextStyle(
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            78,
-                                                                            75,
-                                                                            75),
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  )
-                                                                : Text(
-                                                                    globals
-                                                                        .glb_Due_Amount
-                                                                        .toString(),
-                                                                    style: TextStyle(
-                                                                        color: Color.fromARGB(
-                                                                            255,
-                                                                            78,
-                                                                            75,
-                                                                            75),
-                                                                        fontWeight:
-                                                                            FontWeight.bold),
-                                                                  ))))
-                                                : SizedBox(
-                                                    width: 120,
-                                                    height: 30,
-                                                    child: MediaQuery(
-                                                      data: MediaQuery.of(
-                                                              context)
-                                                          .copyWith(
-                                                              textScaleFactor:
-                                                                  1.0),
-                                                      child: TextField(
-                                                        readOnly: false,
-                                                        controller:
-                                                            cash_Controller,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        keyboardType: TextInputType
-                                                            .number, // Show numeric keyboard
-                                                        inputFormatters: <
-                                                            TextInputFormatter>[
-                                                          FilteringTextInputFormatter
-                                                              .allow(RegExp(
-                                                                  r'[0-9]')), // Allow digits only
-                                                        ],
-                                                        decoration: const InputDecoration(
-                                                            border:
-                                                                OutlineInputBorder(),
-                                                            labelText:
-                                                                'Cash Amount',
-                                                            labelStyle:
-                                                                TextStyle(
-                                                                    fontSize:
-                                                                        10)),
+                                        const Spacer(),
+                                        SizedBox(
+                                          width: 120,
+                                          height: 30,
+                                          child: MediaQuery(
+                                            data: MediaQuery.of(
+                                                context)
+                                                .copyWith(
+                                                textScaleFactor:
+                                                1.0),
+                                            child: TextField(
+                                              readOnly: false,
+                                              controller:
+                                              Wallet_Controller,
+                                              textAlign:
+                                              TextAlign.center,
+                                              keyboardType: TextInputType
+                                                  .number, // Show numeric keyboard
+                                              inputFormatters: <
+                                                  TextInputFormatter>[
+                                                FilteringTextInputFormatter
+                                                    .allow(RegExp(
+                                                    r'[0-9]')), // Allow digits only
+                                              ],
+                                              decoration: const InputDecoration(
+                                                  border:
+                                                  OutlineInputBorder(),
+                                                  labelText:
+                                                  'Wallet Payment',
+                                                  labelStyle:
+                                                  TextStyle(
+                                                      fontSize:
+                                                      10)),
+                                              // onTap: () {
+                                              //   OnlinePament_Not_Available();
+                                              // },
+                                              onChanged: (content) {
+                                                Cash_Card(
+                                                    Wallet_Controller
+                                                        .text,
+                                                    9);
 
-                                                        // onTap: () {
-                                                        //   OnlinePament_Not_Available();
-                                                        // },
-                                                        onChanged: (content) {
-                                                          Cash_Card(
-                                                              cash_Controller
-                                                                  .text,
-                                                              1);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ),
+                                                setState(() {
+                                                  globals.onlinePrice =
+                                                      int.parse(Wallet_Controller
+                                                          .text) *
+                                                          100;
+                                                });
+
+                                                //  Card_calculation(content);
+                                                // OnlinePament_Not_Available();
+                                              },
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
+
+                                      // : Container(),
+
+
+
+
+                                  // Padding(
+                                  //   padding: const EdgeInsets.all(8.0),
+                                  //   child:
+                                  //
+                                  //   Row(
+                                  //     children: [
+                                  //       Container(
+                                  //         width: 100,
+                                  //         child: MediaQuery(
+                                  //           data: MediaQuery.of(context)
+                                  //               .copyWith(textScaleFactor: 1.0),
+                                  //           child: const Text(
+                                  //             "Cash Payment",
+                                  //             style: TextStyle(
+                                  //               fontSize: 15,
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //       Spacer(),
+                                  //       globals.glb_IS_DISCOUNT_NEED == "Y"
+                                  //           ? Container(
+                                  //               decoration: BoxDecoration(
+                                  //                   borderRadius: BorderRadius.all(
+                                  //                       Radius.circular(5)),
+                                  //                   border: Border.all(
+                                  //                       color:
+                                  //                           Colors.blueAccent)),
+                                  //               width: 120,
+                                  //               height: 30,
+                                  //               child: Center(
+                                  //                 child: MediaQuery(
+                                  //                     data: MediaQuery.of(
+                                  //                             context)
+                                  //                         .copyWith(
+                                  //                             textScaleFactor:
+                                  //                                 1.0),
+                                  //                     child: globals.glb_ConcessionPlusCash ==
+                                  //                                 0 ||
+                                  //                             globals.glb_ConcessionPlusCash ==
+                                  //                                 ""
+                                  //                         ? Text(
+                                  //                             globals
+                                  //                                 .total_price,
+                                  //                             style: TextStyle(
+                                  //                                 color: Color
+                                  //                                     .fromARGB(
+                                  //                                         255,
+                                  //                                         78,
+                                  //                                         75,
+                                  //                                         75),
+                                  //                                 fontWeight:
+                                  //                                     FontWeight
+                                  //                                         .bold),
+                                  //                           )
+                                  //                         : Text(
+                                  //                             globals
+                                  //                                 .glb_ConcessionPlusCash
+                                  //                                 .toString(),
+                                  //                             style: TextStyle(
+                                  //                                 color: Color
+                                  //                                     .fromARGB(
+                                  //                                         255,
+                                  //                                         78,
+                                  //                                         75,
+                                  //                                         75),
+                                  //                                 fontWeight:
+                                  //                                     FontWeight
+                                  //                                         .bold),
+                                  //                           )),
+                                  //               ))
+                                  //           : globals.glb_IS_DISCOUNT_NEED ==
+                                  //                   "Y"
+                                  //               ? Container(
+                                  //                   decoration: BoxDecoration(
+                                  //                       borderRadius: BorderRadius.all(
+                                  //                           Radius.circular(5)),
+                                  //                       border: Border.all(
+                                  //                           color: Colors
+                                  //                               .blueAccent)),
+                                  //                   width: 120,
+                                  //                   height: 30,
+                                  //                   child: Center(
+                                  //                       child: MediaQuery(
+                                  //                           data: MediaQuery.of(context)
+                                  //                               .copyWith(
+                                  //                                   textScaleFactor: 1.0),
+                                  //                           child: globals.glb_Due_Amount == 0 || globals.glb_Due_Amount == ""
+                                  //                               ? Text(
+                                  //                                   globals
+                                  //                                       .total_price,
+                                  //                                   style: TextStyle(
+                                  //                                       color: Color.fromARGB(
+                                  //                                           255,
+                                  //                                           78,
+                                  //                                           75,
+                                  //                                           75),
+                                  //                                       fontWeight:
+                                  //                                           FontWeight.bold),
+                                  //                                 )
+                                  //                               : Text(
+                                  //                                   globals
+                                  //                                       .glb_Due_Amount
+                                  //                                       .toString(),
+                                  //                                   style: TextStyle(
+                                  //                                       color: Color.fromARGB(
+                                  //                                           255,
+                                  //                                           78,
+                                  //                                           75,
+                                  //                                           75),
+                                  //                                       fontWeight:
+                                  //                                           FontWeight.bold),
+                                  //                                 ))))
+                                  //               : SizedBox(
+                                  //                   width: 120,
+                                  //                   height: 30,
+                                  //                   child: MediaQuery(
+                                  //                     data: MediaQuery.of(
+                                  //                             context)
+                                  //                         .copyWith(
+                                  //                             textScaleFactor:
+                                  //                                 1.0),
+                                  //                     child: TextField(
+                                  //                       readOnly: false,
+                                  //                       controller:
+                                  //                           cash_Controller,
+                                  //                       textAlign:
+                                  //                           TextAlign.center,
+                                  //                       keyboardType: TextInputType
+                                  //                           .number, // Show numeric keyboard
+                                  //                       inputFormatters: <
+                                  //                           TextInputFormatter>[
+                                  //                         FilteringTextInputFormatter
+                                  //                             .allow(RegExp(
+                                  //                                 r'[0-9]')), // Allow digits only
+                                  //                       ],
+                                  //                       decoration: const InputDecoration(
+                                  //                           border:
+                                  //                               OutlineInputBorder(),
+                                  //                           labelText:
+                                  //                               'Cash Amount',
+                                  //                           labelStyle:
+                                  //                               TextStyle(
+                                  //                                   fontSize:
+                                  //                                       10)),
+                                  //
+                                  //                       // onTap: () {
+                                  //                       //   OnlinePament_Not_Available();
+                                  //                       // },
+                                  //                       onChanged: (content) {
+                                  //                         Cash_Card(
+                                  //                             cash_Controller
+                                  //                                 .text,
+                                  //                             1);
+                                  //                       },
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //     ],
+                                  //   ),
+                                  //
+                                  // ),
+                                  //
                                   globals.glb_IS_DISCOUNT_NEED == "Y"
                                       ? Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -1758,76 +1854,77 @@ class _Tenet_Transaction extends State<Tenet_Transaction> {
                                           ),
                                         )
                                       : Container(),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      top: 20.0,
-                                      left: 8.0,
-                                      bottom: 8.0,
-                                      right: 8.0,
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          width: 150,
-                                          child: MediaQuery(
-                                            data: MediaQuery.of(context)
-                                                .copyWith(textScaleFactor: 1.0),
-                                            child: const Text(
-                                              "Online",
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        SizedBox(
-                                          width: 120,
-                                          height: 30,
-                                          child: MediaQuery(
-                                            data: MediaQuery.of(context)
-                                                .copyWith(textScaleFactor: 1.0),
-                                            child: TextField(
-                                              readOnly: false,
-                                              controller: Wallet_Controller,
-                                              textAlign: TextAlign.center,
-                                              keyboardType: TextInputType
-                                                  .number, // Show numeric keyboard
-                                              inputFormatters: <
-                                                  TextInputFormatter>[
-                                                FilteringTextInputFormatter
-                                                    .allow(RegExp(
-                                                        r'[0-9]')), // Allow digits only
-                                              ],
-                                              decoration: const InputDecoration(
-                                                  border: OutlineInputBorder(),
-                                                  labelText: 'Online Payment',
-                                                  labelStyle:
-                                                      TextStyle(fontSize: 10)),
-                                              // onTap: () {
-                                              //   OnlinePament_Not_Available();
-                                              // },
-                                              onChanged: (content) {
-                                                Cash_Card(
-                                                    Wallet_Controller.text, 9);
-
-                                                setState(() {
-                                                  globals.onlinePrice =
-                                                      int.parse(
-                                                              Wallet_Controller
-                                                                  .text) *
-                                                          100;
-                                                });
-
-                                                //  Card_calculation(content);
-                                                // OnlinePament_Not_Available();
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(
+                                  //     top: 20.0,
+                                  //     left: 8.0,
+                                  //     bottom: 8.0,
+                                  //     right: 8.0,
+                                  //   ),
+                                  //   child: Row(
+                                  //     children: [
+                                  //       Container(
+                                  //         width: 150,
+                                  //         child: MediaQuery(
+                                  //           data: MediaQuery.of(context)
+                                  //               .copyWith(textScaleFactor: 1.0),
+                                  //           child: const Text(
+                                  //             "Online",
+                                  //             style: TextStyle(
+                                  //               fontSize: 15,
+                                  //             ),
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //       const Spacer(),
+                                  //       SizedBox(
+                                  //         width: 120,
+                                  //         height: 30,
+                                  //         child: MediaQuery(
+                                  //           data: MediaQuery.of(context)
+                                  //               .copyWith(textScaleFactor: 1.0),
+                                  //           child: TextField(
+                                  //             readOnly: false,
+                                  //             controller: Wallet_Controller,
+                                  //             textAlign: TextAlign.center,
+                                  //             keyboardType: TextInputType
+                                  //                 .number, // Show numeric keyboard
+                                  //             inputFormatters: <
+                                  //                 TextInputFormatter>[
+                                  //               FilteringTextInputFormatter
+                                  //                   .allow(RegExp(
+                                  //                       r'[0-9]')), // Allow digits only
+                                  //             ],
+                                  //             decoration: const InputDecoration(
+                                  //                 border: OutlineInputBorder(),
+                                  //                 labelText: 'Online Payment',
+                                  //                 labelStyle:
+                                  //                     TextStyle(fontSize: 10)),
+                                  //             // onTap: () {
+                                  //             //   OnlinePament_Not_Available();
+                                  //             // },
+                                  //             onChanged: (content) {
+                                  //               Cash_Card(
+                                  //                   Wallet_Controller.text, 9);
+                                  //
+                                  //               setState(() {
+                                  //                 globals.onlinePrice =
+                                  //                     int.parse(
+                                  //                             Wallet_Controller
+                                  //                                 .text) *
+                                  //                         100;
+                                  //               });
+                                  //
+                                  //               //  Card_calculation(content);
+                                  //               // OnlinePament_Not_Available();
+                                  //             },
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  //
                                   Padding(
                                     padding: const EdgeInsets.only(
                                       top: 20.0,

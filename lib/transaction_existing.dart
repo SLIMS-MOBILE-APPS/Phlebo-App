@@ -7,6 +7,7 @@ import 'bill_details.dart';
 import 'dashboard.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'drawer.dart';
+import 'function.dart';
 import 'globals.dart' as globals;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
@@ -1079,30 +1080,40 @@ class _Phlebo_Transaction_update extends State<Phlebo_Transaction_update> {
         ));
 
     Future<bool> _showExitDialog(BuildContext context) async {
-      final result = await showDialog<bool>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              'Alert',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            ),
-            content: Text(
-                "While using the phlebo app, please only use the app\'s back button."),
-            // actions: <Widget>[
-            //   TextButton(
-            //     onPressed: () {
-            //      await Navigator.of(context).pop(false);
-            //     },
-            //     child: Text('OK'),
-            //   ),
-            // ],
-          );
-        },
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(
+          'Are you sure?',
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        ),
+        content: Text("Do you want to exit the App?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false); // Stay in app
+            },
+            child: Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true); // Trigger exit
+            },
+            child: Text('Yes'),
+          ),
+        ],
       );
+    },
+  );
 
-      return result ?? false;
-    }
+  if (result == true) {
+    SystemNavigator.pop(); // ✅ Exit the app
+  }
+
+  return Future.value(false); // Prevent default back behavior
+}
+
 
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
@@ -1141,6 +1152,23 @@ class _Phlebo_Transaction_update extends State<Phlebo_Transaction_update> {
                   children: [
                     const Text('Transaction'),
                     Spacer(),
+                    IconButton(
+                      icon: Icon(
+                        Icons.dashboard,
+                        color: Color.fromARGB(255, 170, 19, 84),
+                      ),
+                      onPressed: () {
+                        globals_clear_Function();
+                        globals.flag_check = "";
+                        globals.REFRL_ID = "";
+                        globals.Selected_Title = "";
+                        globals.LOCATION_ID_new_order = "";
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Phlebo_Dashboard()),
+                        );
+                      },
+                    ),
                     Center(
                         child: globals.glb_IMG_PATH ==
                                 "https://asterlabs.asterdmhealthcare.com/mobileappapi/Image/Asterqrcode.jpg"
@@ -1611,7 +1639,8 @@ class _Phlebo_Transaction_update extends State<Phlebo_Transaction_update> {
                                       ),
 
                                       globals.Glb_Is_Req_Wallet == "Y"
-                                          ? Padding(
+                                          ?
+                                      Padding(
                                               padding: const EdgeInsets.only(
                                                 top: 20.0,
                                                 left: 8.0,
@@ -1694,6 +1723,7 @@ class _Phlebo_Transaction_update extends State<Phlebo_Transaction_update> {
                                                 ],
                                               ),
                                             )
+
                                           : Container(),
                                       globals.Glb_IS_CARD_NEED == "Y"
                                           ? Padding(

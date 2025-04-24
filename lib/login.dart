@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -390,30 +391,40 @@ class _Phlebo_loginState extends State<Phlebo_login> {
     DateTime selectedDate = DateTime.now();
     String _formattodate = new DateFormat.yMMMd().format(selectedDate);
     Future<bool> _showExitDialog(BuildContext context) async {
-      final result = await showDialog<bool>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              'Alert',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-            ),
-            content: Text(
-                "While using the phlebo app, please only use the app\'s back button."),
-            // actions: <Widget>[
-            //   TextButton(
-            //     onPressed: () {
-            //      await Navigator.of(context).pop(false);
-            //     },
-            //     child: Text('OK'),
-            //   ),
-            // ],
-          );
-        },
+  final result = await showDialog<bool>(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text(
+          'Are you sure?',
+          style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+        ),
+        content: Text("Do you want to exit the App?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(false); // Stay in app
+            },
+            child: Text('No'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(true); // Trigger exit
+            },
+            child: Text('Yes'),
+          ),
+        ],
       );
+    },
+  );
 
-      return result ?? false;
-    }
+  if (result == true) {
+    SystemNavigator.pop(); // ✅ Exit the app
+  }
+
+  return Future.value(false); // Prevent default back behavior
+}
+
 
     return WillPopScope(
       onWillPop: () async {
